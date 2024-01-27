@@ -31,7 +31,7 @@ public class RobotContainer {
   private final Telemetry logger = new Telemetry(SwerveTuningConstants.kSpeedAt12VoltsMps);
 
   public static final CommandPS5Controller s_driverController = new CommandPS5Controller(0);
-  public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(1);
+  //public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(1);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
