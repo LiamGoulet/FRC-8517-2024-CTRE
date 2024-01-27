@@ -43,11 +43,17 @@ public class DriveDefaultCommand extends Command {
 
     switch (m_drive.getDriveMode()) {
       case FIELD_CENTRIC:
-        m_drive.applyRequest(() -> driveFieldCentricOpenLoop
+        m_drive.setControl(driveFieldCentricOpenLoop
         .withVelocityX(MathUtil.applyDeadband(-RobotContainer.s_driverController.getLeftY(),0.08, 1.0) * MaxSpeed)
         .withVelocityY(MathUtil.applyDeadband(-RobotContainer.s_driverController.getLeftX(),0.08, 1.0) * MaxSpeed)
         .withRotationalRate(MathUtil.applyDeadband(-RobotContainer.s_driverController.getRightX(),0.08, 1.0) * MaxAngularRate)
-        ).ignoringDisable(true);
+        );
+
+        // m_drive.applyRequest(() -> driveFieldCentricOpenLoop
+        // .withVelocityX(MathUtil.applyDeadband(-RobotContainer.s_driverController.getLeftY(),0.08, 1.0) * MaxSpeed)
+        // .withVelocityY(MathUtil.applyDeadband(-RobotContainer.s_driverController.getLeftX(),0.08, 1.0) * MaxSpeed)
+        // .withRotationalRate(MathUtil.applyDeadband(-RobotContainer.s_driverController.getRightX(),0.08, 1.0) * MaxAngularRate)
+        // ).ignoringDisable(true);
         
         break;
       case FIELD_CENTRIC_FACINGANGLE:
