@@ -1,10 +1,16 @@
 ![](src/main/java/frc/robot/lib/MythDigLogo1.0.svg)
 
 ## Overview
-This code is a remake of the CTRE swerve module code. The code has been integrated into the command based programming framework.
-This remake drastically changes the CTRE swerve code. Most importantly the PID loops for the Drive and Steer were taken out of the Motor controllers.
-All PIDs are calcualted in Degrees->Volts and MPS->Volts with a Feedforward term. CTRE changes were not updated soon enough to test the code before kickoff.
-Since time was limited the appoach was to use CTRE VoltageOut mode with the above PIDs and Feedforward values. 
+This code uses the CTRE swerve module code. The code has been integrated into the command based programming framework.
+The development of this code was done by using the Phoenix Pro Examples and not the Tuner generator. Changes from the base code are:
+- Removed telemetry of mechanisms2d
+- uses 3 swerve modules instead of 4
+- Rearanged code to fit a better Command Based framework
+- Created DriveDefaultCommand to call different drive modes based on user inputs.
+- Added subsystem interface for updating dashboard
+- Added autonomous getter from dashboard
+- Removed all path planner logic
+
 
 ## Robot 
 The robot used for this code is our typical 3 wheel swerve drive using Swerve Xs from WCProducts.net. All motors are Falcon FXs with CANCoders.
@@ -36,12 +42,11 @@ Changes needed that I understand at this point are:
   The tramper is responsible for getting a game piece from the source area of from the intake. It is utilized to score in the Amp or Trap.
 
 ## Vision - Camera
-Vision utilizes 1 or 2 cameras for vision object detection of AprilTags and Notes. Another camera is utilized for the driver on the Smartdashboard since there are some blind spots.
-Object detection of a note is mainly planned to be used for autonomous to grab the pixel at center field. AprilTag detection can be used to line up with the Speaker and determine distance to speaker.
-With angle and distance the robot can be automated to angle the shooter, adjuste the shooter speed and angle the robot for a speakers shot.
+The vision strategy promoted in the CTRE code is not being used in this code. If we have a chance we will bring it back in. 
+
 
 ## Autonomous
-- Our basic drive strategy is to drive at a angle and velocity in Angle based field centric mode. This allows us to drive in any angle and have the robot PID to an angle. This prevents us from using a PID loop to drive to distance. Since the drive is in velociy mode the time we use is actual distance.
+- Our basic drive strategy is to drive at a angle and velocity in Angle based field centric mode. This allows us to drive in any angle and have the robot PID to an angle. This prevents us from using a PID loop to drive to distance. 
 
 ## Pull/Push Requests
 Please add a Pull Request for changes that you would like to see.
