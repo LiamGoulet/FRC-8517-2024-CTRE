@@ -55,9 +55,10 @@ public final class k {
     private static final double WHEEL_BASE_XY_AVG_m = (WHEEL_BASE_Y_m + WHEEL_BASE_X_m)/2.0;
     private static final double WHEEL_BASE_CIRCUMFERENCE_m = Math.PI * WHEEL_BASE_XY_AVG_m;
     private static final double WHEEL_BASE_MeterPerRad = WHEEL_BASE_CIRCUMFERENCE_m/(2* Math.PI);
-    public static final double TURN_KP = 5.0;
-    public static final double TURN_KI = 1.0;
+    public static final double TURN_KP = 5.0 / Math.PI;
+    public static final double TURN_KI = 1.0 / Math.PI;
     public static final double TURN_KD = 0.0;
+    public static final double ROTATE_DISCRETE_ANGLE_deg = 45.0; 
   }
   public static class DRIVE {
     public static final String T_DRIVER_MODE = "DriveMode";

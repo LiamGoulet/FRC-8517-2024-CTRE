@@ -11,6 +11,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,6 +23,7 @@ import frc.robot.lib.k;
 
 public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsystem, ISubsystem {
   EDriveMode m_driveMode = EDriveMode.FIELD_CENTRIC;
+  Rotation2d m_targetAngle = new Rotation2d();
 
 
 
@@ -60,6 +63,30 @@ public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsy
   }
   public EDriveMode getDriveMode() {
     return m_driveMode;
+  }
+  public Rotation2d getDriveTargetAngle(double _x, double _y){
+    double midAngle = k.DRIVEBASE.ROTATE_DISCRETE_ANGLE_deg;
+    if(_x > 0.8 && _y > 0.8){
+      double ang = Math.toDegrees(Math.atan2(_y,_x));
+      if(ang >= -22.5 && ang <= 22.5){
+        m_targetAngle = new Rotation2d(Math.toRadians(0));
+      }else if(ang >= -67.5 && ang < -22.5){
+        m_targetAngle = new Rotation2d(Math.toRadians(-midAngle));
+      }else if(ang >= -112.5 && ang < -67.5){
+        m_targetAngle = new Rotation2d(Math.toRadians(-90));
+      }else if(ang >= -157.5 && ang < -112.5){
+        m_targetAngle = new Rotation2d(Math.toRadians(-(180-midAngle)));
+      }else if((ang >= 157.5 && ang <= 180.0) || (ang <= -157.5 && ang > -179.99)){
+        m_targetAngle = new Rotation2d(Math.toRadians((180)));
+      }else if(ang >= 67.5 && ang < 22.5){
+        m_targetAngle = new Rotation2d(Math.toRadians(midAngle));
+      }else if(ang >= 112.5 && ang < 67.5){
+        m_targetAngle = new Rotation2d(Math.toRadians(90));
+      }else if(ang >= 157.5 && ang < 112.5){
+        m_targetAngle = new Rotation2d(Math.toRadians((180-midAngle)));
+      }
+    }
+    return m_targetAngle;
   }
   /** Update the dashboard with Drivetrain information.
    *  The robot Pose is handled in the telemetry and odometry of the base class
