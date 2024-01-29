@@ -21,6 +21,7 @@ import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.lib.k;
 import frc.robot.subsystems.SwerveDrivetrainSubsystem;
 import frc.robot.subsystems.SwerveTuningConstants;
+import frc.robot.subsystems.Telemetry;
 
 
 /**
@@ -36,7 +37,7 @@ public class RobotContainer {
 
   public static Set<ISubsystem> subsystems = new HashSet<>();
   public final SwerveDrivetrainSubsystem m_drivetrain = SwerveTuningConstants.DriveTrain;
-  //private final Telemetry logger = new Telemetry(SwerveTuningConstants.kSpeedAt12VoltsMps);
+  private final Telemetry logger = new Telemetry(SwerveTuningConstants.kSpeedAt12VoltsMps);
 
   public static final CommandPS5Controller s_driverController = new CommandPS5Controller(k.OI.DRIVER_CONTROLLER_PORT);
   //public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(1);
@@ -70,7 +71,7 @@ public class RobotContainer {
     // reset the field-centric heading on touchpad press
     s_driverController.touchpad().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldRelative()));
     s_driverController.square().onTrue(new InstantCommand(m_drivetrain::changeDriveMode, m_drivetrain));
-   // m_drivetrain.registerTelemetry(logger::telemeterize);
+    m_drivetrain.registerTelemetry(logger::telemeterize);
   }
 
   /**

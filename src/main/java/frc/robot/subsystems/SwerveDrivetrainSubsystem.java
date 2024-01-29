@@ -61,6 +61,10 @@ public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsy
   public EDriveMode getDriveMode() {
     return m_driveMode;
   }
+  /** Update the dashboard with Drivetrain information.
+   *  The robot Pose is handled in the telemetry and odometry of the base class
+   * 
+   */
   public void updateDashboard(){
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
   }
