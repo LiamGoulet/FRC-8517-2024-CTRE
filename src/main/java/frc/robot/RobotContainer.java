@@ -37,7 +37,7 @@ public class RobotContainer {
 
   public static Set<ISubsystem> subsystems = new HashSet<>();
   public final SwerveDrivetrainSubsystem m_drivetrain = SwerveTuningConstants.DriveTrain;
-  private final Telemetry logger = new Telemetry(SwerveTuningConstants.kSpeedAt12VoltsMps);
+  private final Telemetry logger = new Telemetry();
 
   public static final CommandPS5Controller s_driverController = new CommandPS5Controller(k.OI.DRIVER_CONTROLLER_PORT);
   //public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(1);
