@@ -12,11 +12,14 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.lib.EDriveMode;
+import frc.robot.lib.ISubsystem;
+import frc.robot.lib.k;
 
-public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsystem {
+public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsystem, ISubsystem {
   EDriveMode m_driveMode = EDriveMode.FIELD_CENTRIC;
 
 
@@ -57,6 +60,9 @@ public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsy
   }
   public EDriveMode getDriveMode() {
     return m_driveMode;
+  }
+  public void updateDashboard(){
+    SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
   }
   @Override
   public void periodic() {
