@@ -29,6 +29,13 @@ public final class k {
   }
   public static class ROBORIO_CAN_IDS{
     public static final String NAME = "rio";
+    public static final int SHOOTER_LEFT = 40;
+    public static final int SHOOTER_RIGHT = 41;
+    public static final int SHOOTER_ROTATE = 42;
+    public static final int INTAKE_SPIN = 50;
+    public static final int INTAKE_ROTATE = 51;
+    public static final int CLIMBER_LEFT = 60;
+    public static final int CLIMBER_RIGHT = 61;
   }
   public static class CONVERT{
     public static final double DEGREES_TO_RADIANS = 0.017453292519943295;

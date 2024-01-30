@@ -70,7 +70,7 @@ public class DriveDefaultCommand extends Command {
         m_drive.setControl(driveFieldCentricFacingAngle
         .withVelocityX(MathUtil.applyDeadband(RobotContainer.s_driverController.getLeftY(),0.08, 1.0) * MaxSpeed)
         .withVelocityY(MathUtil.applyDeadband(RobotContainer.s_driverController.getLeftX(),0.08, 1.0) * MaxSpeed)
-        .withTargetDirection(m_drive.getDriveTargetAngle(RobotContainer.s_driverController.getRightX(), RobotContainer.s_driverController.getRightY()))
+        .withTargetDirection(m_drive.getTargetAngle(RobotContainer.s_driverController.getRightX(), RobotContainer.s_driverController.getRightY()))
         );
         break;
       case ROBOT_CENTRIC:

@@ -15,7 +15,7 @@ import edu.wpi.first.networktables.StringPublisher;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class Telemetry {
+public class DriveTelemetry {
 
 
     /**
@@ -23,7 +23,7 @@ public class Telemetry {
      * 
      * @param maxSpeed Maximum speed in meters per second
      */
-    public Telemetry() {
+    public DriveTelemetry() {
 
         SignalLogger.start();
     }
