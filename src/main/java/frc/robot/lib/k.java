@@ -107,11 +107,20 @@ public final class k {
   }
   public static class SHOOTER {
     public static final double ROTATE_GEAR_RATIO = 3*4*5;
-    private static final double ROTATE_MOTOR_CNT_PER_REV = 42;
-    private static final double ROTATE_SHAFT_CNTS_PER_REV = ROTATE_MOTOR_CNT_PER_REV * ROTATE_GEAR_RATIO;
-    public static final double ROTATE_CNTS_PER_DEG = ROTATE_SHAFT_CNTS_PER_REV / 360;
+    public static final double ROTATE_DEG_PER_REV =  360 / ROTATE_GEAR_RATIO;
+    // private static final double ROTATE_MOTOR_CNT_PER_REV = 42;
+    // private static final double ROTATE_SHAFT_CNTS_PER_REV = ROTATE_MOTOR_CNT_PER_REV * ROTATE_GEAR_RATIO;
+    // public static final double ROTATE_CNTS_PER_DEG = ROTATE_SHAFT_CNTS_PER_REV / 360;
     
 
+  }
+  public static class INTAKE {
+    public static final double ROTATE_GEAR_RATIO = 3*4*5;
+    public static final double ROTATE_DEG_PER_REV =  360 / ROTATE_GEAR_RATIO;
+    public static final double DOWN_ANGLE = 0;
+    public static final double IN_ANGLE = 0;
+    public static final double IN_ANGLE_OFFSET = 0;
+    public static final double UP_ANGLE = 0;
   }
 
 }
