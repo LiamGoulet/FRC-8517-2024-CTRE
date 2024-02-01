@@ -7,12 +7,10 @@ package frc.robot.commands.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterDefaultCommand extends Command {
-  ShooterSubsystem m_shooter;
-  /** Creates a new ShooterDefaultCommand. */
-  public ShooterDefaultCommand(ShooterSubsystem _subsystem) {
+public class ShooterSetCommand extends Command {
+  /** Creates a new ShooterSetCommand. */
+  public ShooterSetCommand(ShooterSubsystem _subsystem) {
     addRequirements(_subsystem);
-    m_shooter = _subsystem;
   }
 
   // Called when the command is initially scheduled.
@@ -22,7 +20,7 @@ public class ShooterDefaultCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.setShooterAngle(m_shooter.getShooterRequestedAngle());
+
   }
 
   // Called once the command ends or is interrupted.

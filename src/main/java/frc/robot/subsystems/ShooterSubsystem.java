@@ -20,18 +20,19 @@ import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
 
 public class ShooterSubsystem extends SubsystemBase implements ISubsystem{
-  private TalonFX m_shooterLeft = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT);
-  private TalonFX m_shooterRight = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT);
-  private CANSparkMax m_shooterRotate = new CANSparkMax(k.ROBORIO_CAN_IDS.SHOOTER_ROTATE, MotorType.kBrushless);
+  // private TalonFX m_shooterLeft = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT);
+  // private TalonFX m_shooterRight = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT);
+  // private CANSparkMax m_shooterRotate = new CANSparkMax(k.ROBORIO_CAN_IDS.SHOOTER_ROTATE, MotorType.kBrushless);
 
-  private CANSparkMax m_intakeSpin = new CANSparkMax(k.ROBORIO_CAN_IDS.INTAKE_SPIN, MotorType.kBrushless);
-  private CANSparkMax m_intakeRotate = new CANSparkMax(k.ROBORIO_CAN_IDS.INTAKE_ROTATE, MotorType.kBrushless);
+  // private CANSparkMax m_intakeSpin = new CANSparkMax(k.ROBORIO_CAN_IDS.INTAKE_SPIN, MotorType.kBrushless);
+  // private CANSparkMax m_intakeRotate = new CANSparkMax(k.ROBORIO_CAN_IDS.INTAKE_ROTATE, MotorType.kBrushless);
 
   private double m_intakeAngle = 0;
   ArmFeedforward m_intakeFF = new ArmFeedforward(.5, 1, 0);
   PIDController m_intakeRotatePID = new PIDController(1, 0, 0);
 
   private double m_shooterAngle = 0;
+  private double m_requestedShooterAngle = 0;
   ArmFeedforward m_shooterFF = new ArmFeedforward(.5, 1, 0);
   PIDController m_shooterRotatePID = new PIDController(1, 0, 0);
   Follower m_shooterRightFollower = new Follower(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT, true);  
@@ -40,7 +41,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem{
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-    m_shooterRight.setControl(m_shooterRightFollower);
+    //m_shooterRight.setControl(m_shooterRightFollower);
   }
 
   @Override
@@ -77,34 +78,38 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem{
     }
   }
   public void setIntakeSpeed(double _speed){
-    m_intakeSpin.set(_speed);
+   // m_intakeSpin.set(_speed);
   }
   public void setIntakeAngle(double _angle){
     // TODO: copy from setShooterAngle when it is tested
-    double intakeAngle = m_intakeRotate.getEncoder().getPosition() * k.INTAKE.ROTATE_DEG_PER_REV;
-    m_intakeAngle = intakeAngle;
+    // double intakeAngle = m_intakeRotate.getEncoder().getPosition() * k.INTAKE.ROTATE_DEG_PER_REV;
+    // m_intakeAngle = intakeAngle;
+  }
+  public double getShooterRequestedAngle(){
+    return m_requestedShooterAngle;
   }
   public void setShooterAngle(double _angle){
-    double shooterAngle = m_shooterRotate.getEncoder().getPosition() * k.SHOOTER.ROTATE_DEG_PER_REV; 
-    m_shooterAngle = shooterAngle;
+    m_requestedShooterAngle = _angle;
+    // double shooterAngle = m_shooterRotate.getEncoder().getPosition() * k.SHOOTER.ROTATE_DEG_PER_REV; 
+    // m_shooterAngle = shooterAngle;
 
-    double shooterPID = m_shooterRotatePID.calculate(shooterAngle,_angle);
+    // double shooterPID = m_shooterRotatePID.calculate(shooterAngle,_angle);
 
-    shooterPID *= Math.toRadians(shooterPID) * 0.1; // Fudge factor to get rad to rad/sec as velocity.
-    shooterPID = MathUtil.clamp(shooterPID, -1, 1);
+    // shooterPID *= Math.toRadians(shooterPID) * 0.1; // Fudge factor to get rad to rad/sec as velocity.
+    // shooterPID = MathUtil.clamp(shooterPID, -1, 1);
 
-    double volts = m_shooterFF.calculate(shooterAngle,shooterPID); // Velocity is Radians/Sec Kv needs to be Volts*Sec/Rad
-    m_shooterRotate.setVoltage(volts);
+    // double volts = m_shooterFF.calculate(shooterAngle,shooterPID); // Velocity is Radians/Sec Kv needs to be Volts*Sec/Rad
+    // m_shooterRotate.setVoltage(volts);
 
   }
   public void setShooterSpeed(double _speed){
-    m_shooterLeft.setVoltage(_speed);
-    m_shooterRight.setControl(m_shooterRightFollower);
+    // m_shooterLeft.setVoltage(_speed);
+    // m_shooterRight.setControl(m_shooterRightFollower);
   }
 
   @Override
   public void updateDashboard() {
-    SmartDashboard.putNumber("Shooter Angle", m_shooterAngle);
+    SmartDashboard.putNumber("Shooter Requested Angle", m_requestedShooterAngle);
     SmartDashboard.putNumber("Intake Angle", m_intakeAngle);
   }
 }

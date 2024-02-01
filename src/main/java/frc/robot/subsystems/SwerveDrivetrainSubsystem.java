@@ -66,6 +66,9 @@ public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsy
   public Rotation2d getTargetAngle(double _x, double _y){
     return m_targetAngle.getTargetAngle(_x, _y);
   }
+  public void setTargetAngle(double _angle){
+    m_targetAngle.setTargetAngle(_angle);
+  }
   /** Update the dashboard with Drivetrain information.
    *  The robot Pose is handled in the telemetry and odometry of the base class
    * 

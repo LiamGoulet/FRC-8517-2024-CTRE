@@ -61,6 +61,9 @@ public class TargetAngle {
         }
         return m_targetAngle;
     }
+    public void setTargetAngle(double _angle){
+      m_targetAngle = new Rotation2d(Math.toRadians(_angle));
+    }
     public Rotation2d getTargetAngle(){
         return m_targetAngle;
     }
