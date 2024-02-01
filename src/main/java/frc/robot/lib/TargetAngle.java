@@ -34,7 +34,7 @@ public class TargetAngle {
      * @param _x The x value that usually comes from the joystick
      * @param _y The y value that usually comes from the joystick
      */
-    public Rotation2d getTargetAngle(double _x, double _y){
+    public Rotation2d setTargetAngle(double _x, double _y){
         double midAngle = m_discreteAngle;
         m_hyp = Math.hypot(_x, _y);
         if(Math.abs(m_hyp) > 0.8){

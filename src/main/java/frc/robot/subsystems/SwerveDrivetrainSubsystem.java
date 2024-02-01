@@ -17,13 +17,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.lib.EDriveMode;
+import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.TargetAngle;
 import frc.robot.lib.k;
 
 public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsystem, ISubsystem {
   EDriveMode m_driveMode = EDriveMode.FIELD_CENTRIC;
-  TargetAngle m_targetAngle = new TargetAngle(45);
+
   Rotation2d m_lastTargetAngle = new Rotation2d();
 
   public SwerveDrivetrainSubsystem(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency,
@@ -63,11 +64,18 @@ public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsy
   public EDriveMode getDriveMode() {
     return m_driveMode;
   }
-  public Rotation2d getTargetAngle(double _x, double _y){
-    return m_targetAngle.getTargetAngle(_x, _y);
+  public Rotation2d setTargetAngle(double _x, double _y){
+    return  GD.G_RobotTargetAngle.setTargetAngle(_x, _y);
   }
   public void setTargetAngle(double _angle){
-    m_targetAngle.setTargetAngle(_angle);
+    GD.G_RobotTargetAngle.setTargetAngle(_angle);
+  }
+  public void setShotAngles(double _robotTargetAngle, double _shooterAngle){
+    GD.G_RobotTargetAngle.setTargetAngle(_robotTargetAngle);
+    GD.G_ShooterAngle = _shooterAngle;
+  }
+  public Rotation2d getTargetAngle(){
+    return GD.G_RobotTargetAngle.getTargetAngle();
   }
   /** Update the dashboard with Drivetrain information.
    *  The robot Pose is handled in the telemetry and odometry of the base class
@@ -75,7 +83,7 @@ public class SwerveDrivetrainSubsystem extends SwerveDrivetrain implements Subsy
    */
   public void updateDashboard(){
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
-    SmartDashboard.putNumber("Drive Target Angle", m_targetAngle.getTargetAngle().getDegrees());
+    SmartDashboard.putNumber("Drive Target Angle", GD.G_RobotTargetAngle.getTargetAngle().getDegrees());
   }
   @Override
   public void periodic() {

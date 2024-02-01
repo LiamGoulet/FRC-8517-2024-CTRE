@@ -82,14 +82,19 @@ public class RobotContainer {
     s_driverController.touchpad().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.seedFieldRelative()));
     s_driverController.options().onTrue(new InstantCommand(m_drivetrain::changeDriveMode, m_drivetrain));
     
-    s_driverController.square().onTrue(new ShotCommand(m_drivetrain, m_shooter , 0, 5));
-    s_driverController.circle().onTrue(new ShotCommand(m_drivetrain, m_shooter , 30, 10));
-    s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter , 60, 15));
-    s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter , 90, 20));
-    s_driverController.square().onTrue(new ShotCommand(m_drivetrain, m_shooter , -30, 25).onlyIf(() -> s_driverController.L1().getAsBoolean()));
-    s_driverController.circle().onTrue(new ShotCommand(m_drivetrain, m_shooter , -60, 30).onlyIf(() -> s_driverController.L1().getAsBoolean()));
-    s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter , -90, 40).onlyIf(() -> s_driverController.L1().getAsBoolean()));
-    s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter , 180, 50).onlyIf(() -> s_driverController.L1().getAsBoolean()));
+
+    // s_driverController.square().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(60,50)));
+    // s_driverController.circle().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(50,40)));
+    // s_driverController.triangle().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(40,30)));
+    // s_driverController.cross().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(30,20)));
+    // s_driverController.square().onTrue(new ShotCommand(m_drivetrain, m_shooter , 0, 5));
+    // s_driverController.circle().onTrue(new ShotCommand(m_drivetrain, m_shooter , 30, 10));
+    // s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter , 60, 15));
+    // s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter , 90, 20));
+    // s_driverController.square().onTrue(new ShotCommand(m_drivetrain, m_shooter , -30, 25).onlyIf(() -> s_driverController.L1().getAsBoolean()));
+    // s_driverController.circle().onTrue(new ShotCommand(m_drivetrain, m_shooter , -60, 30).onlyIf(() -> s_driverController.L1().getAsBoolean()));
+    // s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter , -90, 40).onlyIf(() -> s_driverController.L1().getAsBoolean()));
+    // s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter , 180, 50).onlyIf(() -> s_driverController.L1().getAsBoolean()));
 
     m_drivetrain.registerTelemetry(logger::telemeterize);
   }

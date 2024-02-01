@@ -9,4 +9,7 @@ package frc.robot.lib;
  */
 public class GD {
     public static RobotMode G_RobotMode = RobotMode.BOOT;
+    public static double G_ShooterAngle = 0;
+
+    public static TargetAngle G_RobotTargetAngle = new TargetAngle(0);
 }
