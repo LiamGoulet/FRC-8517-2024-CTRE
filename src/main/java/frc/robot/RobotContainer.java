@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import frc.robot.commands.Drive.DriveDefaultCommand;
 import frc.robot.commands.Drive.ShotCommand;
 import frc.robot.commands.Shooter.ShooterDefaultCommand;
+import frc.robot.lib.EDriveMode;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.commandGroups.AutoDoNothing;
@@ -38,6 +39,8 @@ import frc.robot.subsystems.ShooterSubsystem;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+
+  EDriveMode m_driveMode = EDriveMode.FIELD_CENTRIC;
 
   public static Set<ISubsystem> subsystems = new HashSet<>();
   public final SwerveDrivetrainSubsystem m_drivetrain = SwerveTuningConstants.DriveTrain;
@@ -68,6 +71,7 @@ public class RobotContainer {
     m_telemetry.startPeriodic(0.1);
   }
   private void updateDashboard(){
+    SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
     SmartDashboard.putString("RobotMode", GD.G_RobotMode.toString());
     Iterator<ISubsystem> it = subsystems.iterator();
     while(it.hasNext()){
@@ -83,18 +87,14 @@ public class RobotContainer {
     s_driverController.options().onTrue(new InstantCommand(m_drivetrain::changeDriveMode, m_drivetrain));
     
 
-    // s_driverController.square().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(60,50)));
-    // s_driverController.circle().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(50,40)));
-    // s_driverController.triangle().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(40,30)));
-    // s_driverController.cross().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(30,20)));
-    // s_driverController.square().onTrue(new ShotCommand(m_drivetrain, m_shooter , 0, 5));
-    // s_driverController.circle().onTrue(new ShotCommand(m_drivetrain, m_shooter , 30, 10));
-    // s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter , 60, 15));
-    // s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter , 90, 20));
-    // s_driverController.square().onTrue(new ShotCommand(m_drivetrain, m_shooter , -30, 25).onlyIf(() -> s_driverController.L1().getAsBoolean()));
-    // s_driverController.circle().onTrue(new ShotCommand(m_drivetrain, m_shooter , -60, 30).onlyIf(() -> s_driverController.L1().getAsBoolean()));
-    // s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter , -90, 40).onlyIf(() -> s_driverController.L1().getAsBoolean()));
-    // s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter , 180, 50).onlyIf(() -> s_driverController.L1().getAsBoolean()));
+    // s_driverController.square().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(90,0)));
+    // s_driverController.circle().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(80,0)));
+    // s_driverController.triangle().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(70,0)));
+    // s_driverController.cross().onTrue(m_drivetrain.runOnce(() -> m_drivetrain.setShotAngles(60,0)));
+    // s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter, 50, 0).onlyIf(() -> s_driverController.L1().getAsBoolean()));
+    // s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter, 40, 0).onlyIf(() -> s_driverController.L1().getAsBoolean()));
+    // s_driverController.cross().onTrue(new ShotCommand(m_drivetrain, m_shooter, 30, 0).onlyIf(() -> s_driverController.R1().getAsBoolean()));
+    // s_driverController.triangle().onTrue(new ShotCommand(m_drivetrain, m_shooter, 20, 0).onlyIf(() -> s_driverController.R1().getAsBoolean()));
 
     m_drivetrain.registerTelemetry(logger::telemeterize);
   }

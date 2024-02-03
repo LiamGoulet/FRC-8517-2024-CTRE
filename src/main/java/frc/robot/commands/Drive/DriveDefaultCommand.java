@@ -9,6 +9,7 @@ import com.ctre.phoenix6.mechanisms.swerve.utility.PhoenixPIDController;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.lib.GD;
@@ -19,9 +20,9 @@ public class DriveDefaultCommand extends Command {
   SwerveDrivetrainSubsystem m_drive;
   private double MaxSpeed = SwerveTuningConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
   private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
-  // private final SwerveRequest.FieldCentric driveFieldCentricOpenLoop = new
-  // SwerveRequest.FieldCentric()
-  // .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) //
+  //  private final SwerveRequest.FieldCentric driveFieldCentricOpenLoop = new
+  //  SwerveRequest.FieldCentric()
+  //  .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) //
   // Add a 10% deadband
   // .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want
   // field-centric driving in open loop
@@ -57,13 +58,16 @@ public class DriveDefaultCommand extends Command {
   @Override
   public void execute() {
     // Handle target angle
-    if (RobotContainer.s_driverController.L1().getAsBoolean()) {
-      if (RobotContainer.s_driverController.square().getAsBoolean()) {
+     //if (DriverStation.getAlliance() == blue) {
+      if (RobotContainer.s_driverController.L1().getAsBoolean()) {
+      if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
         m_drive.setShotAngles(60, 50);
-      } else if (RobotContainer.s_driverController.circle().getAsBoolean()) {
-        m_drive.setShotAngles(50, 40);
-      } else if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
-        m_drive.setShotAngles(40, 30);
+      } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
+        m_drive.setShotAngles(30, 20);
+      }
+    } else if (RobotContainer.s_driverController.R1().getAsBoolean()) {
+      if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
+        m_drive.setShotAngles(-23, 50);
       } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
         m_drive.setShotAngles(30, 20);
       }
@@ -78,6 +82,31 @@ public class DriveDefaultCommand extends Command {
         m_drive.setShotAngles(-10, -20);
       }
     }
+    // } else {
+    //   if (RobotContainer.s_driverController.L1().getAsBoolean()) {
+    //   if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
+    //     m_drive.setShotAngles(60, 50);
+    //   } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
+    //     m_drive.setShotAngles(30, 20);
+    //   }
+    // } else if (RobotContainer.s_driverController.R1().getAsBoolean()) {
+    //   if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
+    //     m_drive.setShotAngles(60, 50);
+    //   } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
+    //     m_drive.setShotAngles(30, 20);
+    //   }
+    // } else {
+    //   if (RobotContainer.s_driverController.square().getAsBoolean()) {
+    //     m_drive.setShotAngles(20, 10);
+    //   } else if (RobotContainer.s_driverController.circle().getAsBoolean()) {
+    //     m_drive.setShotAngles(10, 0);
+    //   } else if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
+    //     m_drive.setShotAngles(0, -10);
+    //   } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
+    //     m_drive.setShotAngles(-10, -20);
+    //   }
+    // }
+    //}
     switch (m_drive.getDriveMode()) {
       case FIELD_CENTRIC:
         m_drive.setControl(driveFieldCentricVelocity
